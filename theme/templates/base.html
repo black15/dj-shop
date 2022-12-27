@@ -1,0 +1,40 @@
+{% load static tailwind_tags %}
+{% load bootstrap_icons %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<title>{% block title %}{% endblock title %}</title>
+		{% comment %} <script src="https://kit.fontawesome.com/61add623ee.js" crossorigin="anonymous"></script> {% endcomment %}
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta http-equiv="X-UA-Compatible" content="ie=edge">
+		{% tailwind_css %}
+		<style>
+			::-webkit-scrollbar {
+				width: 20px;
+			}
+			::-webkit-scrollbar-track {
+				box-shadow: inset 0 0 5px grey;
+				border-radius: 10px;
+			}
+			::-webkit-scrollbar-thumb {
+				background: grey; 
+				border-radius: 10px;
+			}
+			::-webkit-scrollbar-thumb:hover {
+				background: gray;
+			}
+		</style>
+	</head>
+
+	<body class="bg-gray-50 font-serif leading-normal tracking-normal font-sans">
+		{% include 'snippets/header.html' %}
+		<div class="flex flex-col h-screen justify-between">
+			<div class="container mx-auto w-full">
+				{% block content %}{% endblock content %}
+			</div>
+			{% include 'snippets/footer.html' %}
+		</div>
+	</body>
+</html>

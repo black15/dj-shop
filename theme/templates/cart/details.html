@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+   Your shopping cart
+{% endblock %}
+
+{% block content %}
+   <div class="container mx-auto my-6">
+      <h1 class="max-w-xl text-2xl text-gray-800 font-semibold">
+         Shoping Cart Items
+      </h1>
+      
+      <div class="overflow-x-auto relative my-6">
+         <table class="w-full text-gray-500 dark:text-gray-400">
+            <thead class="text-sm text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+               <tr>
+                  <th scope="col" class="py-3 px-6 text-center rounded-l-lg">Image</th>
+                  <th scope="col" class="py-3 px-6 text-center">Product</th>
+                  <th scope="col" class="py-3 px-6 text-center">Quantity</th>
+                  <th scope="col" class="py-3 px-6 text-center">Remove</th>
+                  <th scope="col" class="py-3 px-6 text-center">Unit price</th>
+                  <th scope="col" class="py-3 px-6 text-center rounded-r-lg">Price</th>
+               </tr>
+            </thead>
+            <tbody class="text-[14px]">
+               {% for item in cart %}
+                  {% with product=item.product %}
+                  <tr class="bg-white dark:bg-gray-800">
+                     <td scope="row" class="py-4 px-6 font-medium text-gray-900 items-center whitespace-nowrap dark:text-white">
+                        <a  href="{{product.get_absolute_url}}">
+                           <img class="mx-auto w-32 h-32 object-scale-down bg-center transition duration-700 ease-in-out hover:object-cover" src="{{product.image.url}}">
+                        </a>
+                     </td>
+                     <td class="py-4 px-6 text-center">
+                        {{product.name}}
+                     </td>
+                     <td class="py-4 px-6 text-center">
+                        <form action="{% url 'cart:add_cart_item' product.id %}" method="post">
+                           {% csrf_token %}
+                           {{item.update_quantity_form.quantity}}
+                           {{item.update_quantity_form.override}}
+                           <input class="text-gray-100 font-semibold bg-emerald-500 rounded px-3 p-2 cursor-pointer" type="submit" value="Update">
+                        </form>
+                     </td>
+                     <td class="py-4 px-6 text-center">
+                        <form action="{% url 'cart:remove_cart_item' product.id %}" method="post">
+                           {% csrf_token %}
+                           <input class="text-gray-200 font-semibold bg-red-500 rounded px-3 p-2 cursor-pointer" type="submit" value="x">
+                        </form>
+                     </td>
+                     <td class="py-4 px-6 text-center">
+                        {{product.price}}
+                     </td>
+                     <td class="py-4 px-6 text-center">
+                        {{product.item.total_price}}
+                     </td>
+                  </tr>
+                  {% endwith %}
+               {% endfor %}
+            </tbody>
+            <tfoot>
+               <tr class="text-gray-900 dark:text-white text-md font-medium">
+                  <th scope="row" class="py-3 px-6">Total</th>
+                  <td class="py-3 px-6" colspan="1"></td>
+                  
+                  <td class="py-3 px-6 text-center">{{cart.get_total_quantities}}</td>
+                  <td class="py-3 px-6" colspan="2"></td>
+                  <td class="py-3 px-6 text-center">{{cart.get_total_price}}</td>
+               </tr>
+            </tfoot>
+         </table>
+         <div class="flex flex-row items-center space-x-6 mt-6">
+            <a class="max-w-xl text-gray-800 bg-gray-100 rounded px-4 p-2" href="{% url 'shop:all_products' %}">Continue shopping</a>
+            <a class="max-w-xl text-gray-100 bg-blue-400 rounded px-4 p-2" href="#">Checkout</a>
+         </div>
+      </div>
+
+   </div>
+{% endblock %}
