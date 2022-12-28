@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Checked out Successfully{% endblock %}
+
+{% block content %}
+   <div class="flex flex-col mx-auto justify-center items-center">
+      <h1 class="max-w-xl text-gray-800 text-2xl font-medium">
+         Thank you.
+      </h1>
+      <p class="max-w-2xl text-gray-700 text-md">
+         Your order has been successfully generated and checked out.
+         Your order number is {{order.id}}
+      </p>
+   </div>
+{% endblock %}

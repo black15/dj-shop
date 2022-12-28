@@ -1,33 +1,45 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block title %}Welcome to Dj-Shop{% endblock %}
+{% block title %}Dj-Shop | {{product.name}}{% endblock %}
 
 {% block content %}
    <div class="flex flex-col space-y-6">
       {% include 'components/categories.html' %}
 
       <!-- Product Card -->
-      <div class="flex flex-row space-x-6">
-         <!-- Product Image -->
-         <div class="flex w-64 items-center justify-center">
-            <img class='mx-auto w-40 h-40 object-scale-down bg-center transition duration-700 ease-in-out hover:object-cover' src="{{product.image.url}}" width="200">
-         </div>
-         <!-- Product Info -->
-         <div class="flex flex-col">
-            <h1 class="max-w-2xl text-2xl text-gray-800 font-semibodl mb-1">
+      <div class="flex flex-col space-y-6">
+         <!-- Title and Category -->
+         <div>
+            <h1 class="max-w-4xl text-3xl text-gray-800 font-semibodl mb-1">
                {{product.name}}
             </h1>
             <h2 class="max-w-xl text-lg text-gray-700 italic mb-1">
                {{product.category}}
             </h2>
+         </div>
+         <!-- Product Image -->
+         <div class="flex flex-row space-x-2 hero container max-w-screen-lg pb-10 overflow-x-auto">
+            <img class='h-56 md:h-64 lg:h-80 pl-3' src="{{product.image.url}}">
+            <!-- Product Sub Images -->
+            {% if product_images %}
+               {% for image in product_images %}
+                  <img class='h-56 md:h-64 lg:h-80 pl-3' src="{{image.images.url}}">
+               {% endfor %}
+            {% endif %}
+         </div>
+         <!-- Product Info -->
+         <div class="flex flex-col">
             <h2 class="max-w-xl text-lg text-green-800 italic mb-4">
-               {{product.price}} DZD
+               {{product.price}} DA
             </h2>
-            <p class="max-w-3xl text-gray-700">
-               {{product.description | linebreaks}}
-            </p>
-            <form action="{% url 'cart:add_cart_item' product.id %}" method="post">
+            <h2 class="text-gray-800 text-xl font-medium my-1">Description</h2>
+            <div class="max-w-2xl text-gray-900 italic p-6 mb-4 bg-gray-100 border-l-4 border-gray-300 dark:border-gray-500 dark:bg-gray-800 rounded-r-lg">
+               {% autoescape off %}
+                  {{product.description | linebreaks }}
+               {% endautoescape %}
+            </div>
+            <form class="my-6" action="{% url 'cart:add_cart_item' product.id %}" method="post">
                {% csrf_token %}
                {{add_product_to_cart}}
                <input class="text-gray-700 font-semibold bg-blue-400 px-4 p-2 rounded" type="submit" value="Add to Cart">

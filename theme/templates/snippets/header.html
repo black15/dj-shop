@@ -2,7 +2,7 @@
 
 <nav class="bg-gray-800">
    <div class="mx-auto max-w-7xl mb-2 px-2 sm:px-6 lg:px-8">
-     <div class="relative flex h-16 items-center justify-around">
+     <div class="relative flex h-[70px] items-center justify-around">
        <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
          <!-- Mobile menu button-->
          <button type="button" class="inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white" aria-controls="mobile-menu" aria-expanded="false">
@@ -17,9 +17,9 @@
            </svg>
          </button>
        </div>
-       <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-         <div class="flex flex-shrink-0 items-center">
-           <img class="block h-8 w-auto" src="https://dotmobo.github.io/images/djangopony.png" alt="Your Company">
+       <div class="flex flex-1 items-center justify-center sm:justify-start">
+         <div class="flex flex-shrink-0">
+           <img class="block w-16" src="https://dotmobo.github.io/images/djangopony.png" alt="Your Company">
          </div>
          <div class="hidden sm:ml-6 sm:block">
            <div class="flex space-x-4">
@@ -46,7 +46,13 @@
 
        <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
           <a href="{% url 'cart:cart_content' %}" class="flex flex-row-reverse text-center rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-            <span class="ml-1">9</span>
+            <span class="ml-1">
+              {% with count=cart.get_total_quantities  %}
+                {% if count %}
+                  {{count}}
+                {% endif %}
+              {% endwith %}
+            </span>
             <span class="sr-only">View notifications</span>
            <!-- Heroicon name: outline/bell -->
            <svg fill="#ddd" width="26" height="26" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" stroke="#ddd" stroke-width="0"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"><path d="M 20.0079 39.6485 L 47.3596 39.6485 C 48.2735 39.6485 49.0703 38.8985 49.0703 37.8907 C 49.0703 36.8829 48.2735 36.1328 47.3596 36.1328 L 20.4063 36.1328 C 19.0704 36.1328 18.2501 35.1953 18.0391 33.7656 L 17.6641 31.3047 L 47.4062 31.3047 C 50.8281 31.3047 52.5859 29.1953 53.0783 25.8438 L 54.9532 13.4453 C 55.0003 13.1407 55.0468 12.7656 55.0468 12.5547 C 55.0468 11.4297 54.2030 10.6563 52.9142 10.6563 L 14.6407 10.6563 L 14.1954 7.6797 C 13.9610 5.8750 13.3048 4.9609 10.9141 4.9609 L 2.6876 4.9609 C 1.7501 4.9609 .9532 5.7813 .9532 6.7188 C .9532 7.6797 1.7501 8.5000 2.6876 8.5000 L 10.6094 8.5000 L 14.3594 34.2344 C 14.8516 37.5625 16.6094 39.6485 20.0079 39.6485 Z M 51.0623 14.1953 L 49.3987 25.4219 C 49.2110 26.8750 48.4377 27.7656 47.0548 27.7656 L 17.1485 27.7891 L 15.1563 14.1953 Z M 21.8594 51.0391 C 23.9688 51.0391 25.6563 49.375 25.6563 47.2422 C 25.6563 45.1328 23.9688 43.4453 21.8594 43.4453 C 19.7266 43.4453 18.0391 45.1328 18.0391 47.2422 C 18.0391 49.375 19.7266 51.0391 21.8594 51.0391 Z M 43.7735 51.0391 C 45.9062 51.0391 47.5939 49.375 47.5939 47.2422 C 47.5939 45.1328 45.9062 43.4453 43.7735 43.4453 C 41.6641 43.4453 39.9532 45.1328 39.9532 47.2422 C 39.9532 49.375 41.6641 51.0391 43.7735 51.0391 Z"></path></g></svg>

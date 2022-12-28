@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Custom Apps
     'shop',
     'cart',
+    'order',
     
     # TailwindCSS
     'tailwind',

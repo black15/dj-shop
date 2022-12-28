@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+   <div class="flex flex-col justify-center space-y-6 items-start xl:justify-around xl:flex-row-reverse xl:items-start mt-12 mx-6">
+      <div class="mx-auto flex flex-col justify-center space-y-4 md:justify-start bg-gray-100 rounded px-6 py-4 border border-b-8 border-gray-200 my-6">
+         <h2 class="max-w-2xl text-gray-700 text-2xl font-medium">Your Order</h2>
+         <div class="flex flex-col list-disc space-y-1">
+            {% for item in cart %}
+               <div class="flex flex-row items-center justify-between space-x-6">
+                  <span class="max-w-2xl text-gray-700 font-medium">
+                     {{item.quantity}} X {{item.product}}
+                  </span>
+                  <span class="max-w-2xl text-gray-800 font-medium">
+                     {{item.price}} 
+                  </span>
+               </div>
+            {% endfor %}
+         </div>
+         <div class="flex flex-row justify-between">
+            <span class="max-w-2xl text-gray-700 font-semibold">TOTAL</span>
+            <span class="max-w-2xl text-gray-700 font-semibold">{{cart.get_total_price}} DZD</span>
+         </div>
+      </div>
+      <div class="mx-auto">
+         <form action="{% url 'order:create' %}" method="post">
+            {% csrf_token %}
+            {{ form.non_field_errors }}
+            <div class="grid gap-6 mb-6 md:grid-cols-2">
+               {% for field in form %}
+                  <div>
+                     <label for="{{field.id}}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{field.label_tag}}</label>
+                     {{field}}
+                  </div>
+               {% endfor %}
+            </div>
+            <div class="flex items-start mb-6">
+               <div class="flex items-center h-5">
+                  <input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-blue-600 dark:ring-offset-gray-800" required>
+               </div>
+               <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
+            </div>
+            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+         </form>
+      </div>
+   </div>
+{% endblock %}

@@ -2,79 +2,87 @@
 {% load static %}
 
 {% block title %}
-   Your shopping cart
+   Shopping cart
 {% endblock %}
 
 {% block content %}
-   <div class="container mx-auto my-6">
-      <h1 class="max-w-xl text-2xl text-gray-800 font-semibold">
-         Shoping Cart Items
-      </h1>
-      
-      <div class="overflow-x-auto relative my-6">
-         <table class="w-full text-gray-500 dark:text-gray-400">
-            <thead class="text-sm text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
-               <tr>
-                  <th scope="col" class="py-3 px-6 text-center rounded-l-lg">Image</th>
-                  <th scope="col" class="py-3 px-6 text-center">Product</th>
-                  <th scope="col" class="py-3 px-6 text-center">Quantity</th>
-                  <th scope="col" class="py-3 px-6 text-center">Remove</th>
-                  <th scope="col" class="py-3 px-6 text-center">Unit price</th>
-                  <th scope="col" class="py-3 px-6 text-center rounded-r-lg">Price</th>
-               </tr>
-            </thead>
-            <tbody class="text-[14px]">
-               {% for item in cart %}
-                  {% with product=item.product %}
-                  <tr class="bg-white dark:bg-gray-800">
-                     <td scope="row" class="py-4 px-6 font-medium text-gray-900 items-center whitespace-nowrap dark:text-white">
-                        <a  href="{{product.get_absolute_url}}">
-                           <img class="mx-auto w-32 h-32 object-scale-down bg-center transition duration-700 ease-in-out hover:object-cover" src="{{product.image.url}}">
-                        </a>
-                     </td>
-                     <td class="py-4 px-6 text-center">
-                        {{product.name}}
-                     </td>
-                     <td class="py-4 px-6 text-center">
-                        <form action="{% url 'cart:add_cart_item' product.id %}" method="post">
-                           {% csrf_token %}
-                           {{item.update_quantity_form.quantity}}
-                           {{item.update_quantity_form.override}}
-                           <input class="text-gray-100 font-semibold bg-emerald-500 rounded px-3 p-2 cursor-pointer" type="submit" value="Update">
-                        </form>
-                     </td>
-                     <td class="py-4 px-6 text-center">
-                        <form action="{% url 'cart:remove_cart_item' product.id %}" method="post">
-                           {% csrf_token %}
-                           <input class="text-gray-200 font-semibold bg-red-500 rounded px-3 p-2 cursor-pointer" type="submit" value="x">
-                        </form>
-                     </td>
-                     <td class="py-4 px-6 text-center">
-                        {{product.price}}
-                     </td>
-                     <td class="py-4 px-6 text-center">
-                        {{product.item.total_price}}
-                     </td>
+   <div class="container mx-auto">
+      <div class="relative my-6">
+         {% if cart.get_total_quantities %}
+            <h1 class="max-w-xl text-2xl text-gray-800 font-semibold">
+               Shopping Cart Items
+            </h1>
+            <table class="w-full text-gray-500 dark:text-gray-400 mt-6">
+               <thead class="text-sm text-gray-700 uppercase bg-gray-100 dark:bg-gray-700 dark:text-gray-400">
+                  <tr>
+                     <th scope="col" class="py-3 px-6 text-center rounded-l-lg">Image</th>
+                     <th scope="col" class="py-3 px-6 text-center">Product</th>
+                     <th scope="col" class="py-3 px-6 text-center">Quantity</th>
+                     <th scope="col" class="py-3 px-6 text-center">Remove</th>
+                     <th scope="col" class="py-3 px-6 text-center">Unit price</th>
+                     <th scope="col" class="py-3 px-6 text-center rounded-r-lg">Price</th>
                   </tr>
-                  {% endwith %}
-               {% endfor %}
-            </tbody>
-            <tfoot>
-               <tr class="text-gray-900 dark:text-white text-md font-medium">
-                  <th scope="row" class="py-3 px-6">Total</th>
-                  <td class="py-3 px-6" colspan="1"></td>
-                  
-                  <td class="py-3 px-6 text-center">{{cart.get_total_quantities}}</td>
-                  <td class="py-3 px-6" colspan="2"></td>
-                  <td class="py-3 px-6 text-center">{{cart.get_total_price}}</td>
-               </tr>
-            </tfoot>
-         </table>
-         <div class="flex flex-row items-center space-x-6 mt-6">
-            <a class="max-w-xl text-gray-800 bg-gray-100 rounded px-4 p-2" href="{% url 'shop:all_products' %}">Continue shopping</a>
-            <a class="max-w-xl text-gray-100 bg-blue-400 rounded px-4 p-2" href="#">Checkout</a>
-         </div>
+               </thead>
+               <tbody class="text-[14px]">
+                  {% for item in cart %}
+                     {% with product=item.product %}
+                     <tr class="bg-white dark:bg-gray-800">
+                        <td scope="row" class="py-4 px-6 font-medium text-gray-900 items-center whitespace-nowrap dark:text-white">
+                           <a  href="{{product.get_absolute_url}}">
+                              <img class="mx-auto w-32 h-32 object-scale-down bg-center transition duration-700 ease-in-out hover:object-cover" src="{{product.image.url}}">
+                           </a>
+                        </td>
+                        <td class="py-4 px-6 text-center">
+                           {{product.name}}
+                        </td>
+                        <td class="py-4 px-6 text-center">
+                           <form action="{% url 'cart:add_cart_item' product.id %}" method="post">
+                              {% csrf_token %}
+                              {{item.update_quantity_form.quantity}}
+                              {{item.update_quantity_form.override}}
+                              <input class="text-gray-100 font-semibold bg-emerald-500 rounded px-3 p-2 cursor-pointer" type="submit" value="Update">
+                           </form>
+                        </td>
+                        <td class="py-4 px-6 text-center">
+                           <form action="{% url 'cart:remove_cart_item' product.id %}" method="post">
+                              {% csrf_token %}
+                              <input class="text-gray-200 font-semibold bg-red-500 rounded px-3 p-2 cursor-pointer" type="submit" value="x">
+                           </form>
+                        </td>
+                        <td class="py-4 px-6 text-center">
+                           {{product.price}}
+                        </td>
+                        <td class="py-4 px-6 text-center">
+                           {{product.item.total_price}}
+                        </td>
+                     </tr>
+                     {% endwith %}
+                  {% endfor %}
+               </tbody>
+               <tfoot>
+                  <tr class="text-gray-900 dark:text-white text-md font-medium">
+                     <th scope="row" class="py-3 px-6">Total</th>
+                     <td class="py-3 px-6" colspan="1"></td>
+                     
+                     <td class="py-3 px-6 text-center">{{cart.get_total_quantities}}</td>
+                     <td class="py-3 px-6" colspan="2"></td>
+                     <td class="py-3 px-6 text-center">{{cart.get_total_price}}</td>
+                  </tr>
+               </tfoot>
+            </table>
+            <div class="flex flex-row items-center space-x-6 mt-6">
+               <a class="max-w-xl text-gray-800 bg-gray-100 rounded px-4 p-2" href="{% url 'shop:all_products' %}">Continue shopping</a>
+               <a class="max-w-xl text-gray-100 bg-blue-400 rounded px-4 p-2" href="{% url 'order:create' %}">Checkout</a>
+            </div>
+         {% else %}
+            <div class="flex flex-col items-center justify-center space-x-6 mt-12">
+               <svg width="200px" height="200px" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg" fill="#000000" stroke="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"><defs><style>.cls-1{fill:#50C878;}.cls-2{fill:#dddddd;}.cls-3{fill:#7cb3b0;}.cls-4{fill:#577065;}</style></defs><title>shopping-bag</title><g id="shopping-bag"><g id="shopping-bag-2" data-name="shopping-bag"><g id="fill"><rect class="cls-1" x="6.92" y="18.51" width="76.15" height="69.53"></rect><polyline class="cls-2" points="10.23 18.51 10.23 1.96 79.77 1.96 79.77 18.51"></polyline><polygon class="cls-1" points="10.09 15.37 10.09 1.96 11.99 1.96 20.02 7.92 10.09 15.37"></polygon><polygon class="cls-3" points="20.02 7.92 20.02 18.51 10.09 18.51 10.09 15.37 20.02 7.92"></polygon><polygon class="cls-1" points="79.91 15.37 79.91 1.96 78.01 1.96 69.98 7.92 79.91 15.37"></polygon><polygon class="cls-3" points="69.98 7.92 69.98 18.51 79.91 18.51 79.91 15.37 69.98 7.92"></polygon><circle class="cls-2" cx="31.76" cy="28.45" r="3.31"></circle><circle class="cls-2" cx="58.24" cy="28.45" r="3.31"></circle></g><g id="outline"><path class="cls-4" d="M83.08,90H6.92a2,2,0,0,1-2-2V18.51a2,2,0,0,1,2-2H83.08a2,2,0,0,1,2,2V88A2,2,0,0,1,83.08,90ZM8.88,86.09H81.12V20.47H8.88Z"></path><path class="cls-4" d="M79.77,20.47a2,2,0,0,1-2-2V3.91H12.19v14.6a2,2,0,0,1-3.91,0V2a2,2,0,0,1,2-2H79.77a2,2,0,0,1,2,2V18.51A2,2,0,0,1,79.77,20.47Z"></path><path class="cls-4" d="M6.92,20.47a2,2,0,0,1-1.18-3.52l11-8.27L9.15,3.59A2,2,0,1,1,11.32.33L21.25,7a2,2,0,0,1,.09,3.19L8.1,20.08A1.94,1.94,0,0,1,6.92,20.47Z"></path><path class="cls-4" d="M83.08,20.47a1.94,1.94,0,0,1-1.17-.39L68.66,10.15A2,2,0,0,1,68.75,7L78.68.33a2,2,0,1,1,2.17,3.26L73.22,8.67l11,8.27a2,2,0,0,1-1.18,3.52Z"></path><path class="cls-4" d="M45,60.2A15.22,15.22,0,0,1,29.8,45V31.76a2,2,0,0,1,3.91,0V45a11.29,11.29,0,0,0,22.58,0V31.76a2,2,0,0,1,3.91,0V45A15.22,15.22,0,0,1,45,60.2Z"></path><path class="cls-4" d="M31.76,33.71A5.27,5.27,0,1,1,37,28.45,5.27,5.27,0,0,1,31.76,33.71Zm0-6.62a1.35,1.35,0,1,0,1.35,1.35A1.36,1.36,0,0,0,31.76,27.09Z"></path><path class="cls-4" d="M58.24,33.71a5.27,5.27,0,1,1,5.27-5.27A5.27,5.27,0,0,1,58.24,33.71Zm0-6.62a1.35,1.35,0,1,0,1.35,1.35A1.36,1.36,0,0,0,58.24,27.09Z"></path><path class="cls-4" d="M20.17,20.47a2,2,0,0,1-2-2V8.58a2,2,0,0,1,3.91,0v9.93A2,2,0,0,1,20.17,20.47Z"></path><path class="cls-4" d="M69.83,20.47a2,2,0,0,1-2-2V8.58a2,2,0,0,1,3.91,0v9.93A2,2,0,0,1,69.83,20.47Z"></path></g></g></g></g>
+               </svg>
+               <h1 class="max-w-2xl text-gray-800 text-2xl font-medium mt-6">
+                  Your Shopping Bag is Empty.
+               </h1>
+            </div>
+         {% endif %}
       </div>
-
    </div>
 {% endblock %}

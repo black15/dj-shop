@@ -21,6 +21,7 @@ from django.conf.urls.static import static
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cart/', include('cart.urls', namespace='cart')),
+    path('order/', include('order.urls', namespace='order')),
     path("__reload__/", include("django_browser_reload.urls")),
     path('', include('shop.urls', namespace='shop')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

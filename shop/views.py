@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404
-from .models import *
+from .models import Category, Product, ProductImages
 from cart.forms import CartAddProductForm
 
 def products_list(request, category_slug=None):
@@ -27,5 +27,6 @@ def product_details(request, id, slug):
    context['product'] = product
    context['categories'] = categories
    context['add_product_to_cart'] = add_to_cart
+   context['product_images'] = ProductImages.objects.filter(product=product)
    
    return render(request, 'shop/product/details.html', context)

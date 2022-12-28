@@ -1,5 +1,8 @@
 from django.contrib import admin
-from .models import *
+from .models import Category, Product, ProductImages
+
+class PostImageAdmin(admin.StackedInline):
+    model = ProductImages
 
 @admin.register(Category)
 class CategoryAdmin(admin.ModelAdmin):
@@ -13,4 +16,4 @@ class ProductAdmin(admin.ModelAdmin):
    list_editable  = ['price', 'available']
    list_display_links = ('name',)
    prepopulated_fields  = {'slug': ('name',)}
-   
+   inlines = [PostImageAdmin]
