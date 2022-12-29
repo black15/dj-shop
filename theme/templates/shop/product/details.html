@@ -4,7 +4,18 @@
 {% block title %}Dj-Shop | {{product.name}}{% endblock %}
 
 {% block content %}
-   <div class="flex flex-col space-y-6">
+   <style>
+      .scrollbar-hide::-webkit-scrollbar {
+         display: none;
+     }
+     
+     /* For IE, Edge and Firefox */
+     .scrollbar-hide {
+         -ms-overflow-style: none;  /* IE and Edge */
+         scrollbar-width: none;  /* Firefox */
+     }
+   </style>
+   <div class="flex flex-col space-y-6 px-6">
       {% include 'components/categories.html' %}
 
       <!-- Product Card -->
@@ -33,16 +44,20 @@
             <h2 class="max-w-xl text-lg text-green-800 italic mb-4">
                {{product.price}} DA
             </h2>
-            <h2 class="text-gray-800 text-xl font-medium my-1">Description</h2>
-            <div class="max-w-2xl text-gray-900 italic p-6 mb-4 bg-gray-100 border-l-4 border-gray-300 dark:border-gray-500 dark:bg-gray-800 rounded-r-lg">
-               {% autoescape off %}
-                  {{product.description | linebreaks }}
-               {% endautoescape %}
-            </div>
+            {% if product.description %}
+               <h2 class="text-gray-800 text-xl font-medium my-1">Description</h2>
+               <div class="max-w-2xl max-h-96 overflow-y-auto scrollbar-hide text-gray-900 italic p-6 mb-4 bg-gray-100 border-l-4 border-gray-300 dark:border-gray-500 dark:bg-gray-800 rounded-r-lg">
+                  {% autoescape off %}
+                     {{product.description | linebreaks }}
+                  {% endautoescape %}
+               </div>
+            {% else %}
+               <h2 class="text-gray-800 text-xl font-medium my-1">No Description</h2>
+            {% endif %}
             <form class="my-6" action="{% url 'cart:add_cart_item' product.id %}" method="post">
                {% csrf_token %}
                {{add_product_to_cart}}
-               <input class="text-gray-700 font-semibold bg-blue-400 px-4 p-2 rounded" type="submit" value="Add to Cart">
+               <input class="text-gray-50 font-semibold bg-blue-400 px-4 p-2 rounded" type="submit" value="Add to Cart">
             </form>
          </div>
          <!-- End Product Info -->
