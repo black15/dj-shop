@@ -2,73 +2,13 @@
 {% load static %}
 
 {% block title %}Payment Process{% endblock %}
+{% block head_child %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'js/stripe/checkout.js' %}" defer></script>
+{% endblock head_child %}
 
 {% block content %}
-
-<!-- includes the Braintree JS client SDK -->
-<script src="https://js.braintreegateway.com/web/3.88.4/js/client.min.js"></script>
-<script src="https://js.braintreegateway.com/web/3.88.4/js/hosted-fields.min.js"></script>
-
-<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
-
-<div class="bootstrap-basic">
-	<form id="payment" method="post">
-    <label for="card-number">Card Number</label>
-    <div id="card-number" class="field"></div>
-    <label for="cvv">CVV</label>
-    <div id="cvv" class="field"></div>
-    <label for="expiration-date">Expiration Date</label>
-    <div id="expiration-date" class="field"></div>
-<input type="hidden" id="nonce" name="payment_method_nonce" value="">
-{% csrf_token %}
-<input type="submit" value="Pay">
-</form>
-<script>
-var form = document.querySelector('#payment');
-var submit = document.querySelector('input[type="submit"]');
-braintree.client.create({
-authorization: '{{ client_tok }}'
-}, function (clientErr, clientInstance) {
-if (clientErr) {
-console.error(clientErr);
-return;
-}
-braintree.hostedFields.create({
-client: clientInstance,
-styles: {
-'input': {'font-size': '13px'},
-'input.invalid': {'color': 'red'},
-'input.valid': {'color': 'green'}
-},
-fields: {
-number: {selector: '#card-number'},
-cvv: {selector: '#cvv'},
-expirationDate: {selector: '#expiration-date'}
-}
-}, function (hostedFieldsErr, hostedFieldsInstance) {
-if (hostedFieldsErr) {
-console.error(hostedFieldsErr);
-return;
-}
-submit.removeAttribute('disabled');
-form.addEventListener('submit', function (event) {
-  event.preventDefault();
-  hostedFieldsInstance.tokenize(function (tokenizeErr,
-  payload) {
-  if (tokenizeErr) {
-  console.error(tokenizeErr);
-  return;
-  }
-  // set nonce to send to the server
-  document.getElementById('nonce').value = payload.nonce;
-  // submit form
-  document.getElementById('payment').submit();
-  });
-  }, false);
-  });
-  });
-  </script>
- </div>
+  <div class="container mx-auto flex items-center justify-center my-12">
+    <button id="submitBtn" type="submit" class="text-white bg-green-700 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-lg w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-600 dark:focus:ring-blue-800">Purchase!</button>
+  </div>
 {% endblock %}

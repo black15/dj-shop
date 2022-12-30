@@ -1,6 +1,12 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Checkout{% endblock %}
+
+{% block head_child %}
+<script src="https://js.stripe.com/v3/"></script>
+<script src="{% static 'js/stripe/checkout.js' %}" defer></script>
+{% endblock head_child %}
 
 {% block content %}
    <div class="flex flex-col justify-center space-y-6 items-start xl:justify-around xl:flex-row-reverse xl:items-start mt-12 mx-6">
@@ -20,7 +26,7 @@
          </div>
          <div class="flex flex-row justify-between">
             <span class="max-w-2xl text-gray-700 font-semibold">TOTAL</span>
-            <span class="max-w-2xl text-gray-700 font-semibold">{{cart.get_total_price}} DZD</span>
+            <span class="max-w-2xl text-gray-700 font-semibold">{{cart.get_total_price}} $</span>
          </div>
       </div>
       <div class="mx-auto">
@@ -41,7 +47,12 @@
                </div>
                <label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-blue-600 hover:underline dark:text-blue-500">terms and conditions</a>.</label>
             </div>
-            <button type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Submit</button>
+            
+            <section class="section">
+               <div class="container">
+                  <button id="submitBtn" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Purchase!</button>
+               </div>
+             </section>
          </form>
       </div>
    </div>

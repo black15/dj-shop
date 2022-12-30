@@ -29,6 +29,10 @@ environ.Env.read_env()
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-l1c^^g-yyl=2+owvx-i#3571=v)1ibe9uq(@%-i3jkq381b3&_'
 
+# Stripe Configuration
+STRIPE_SECRET_KEY       = env('STRIPE_SECRET_KEY')
+STRIPE_PUBLISHABLE_KEY  = env('STRIPE_PUBLISHABLE_KEY')
+
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
@@ -171,12 +175,11 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 # Braintree Api Settings
-
-BRAINTREE_CONF = braintree.BraintreeGateway(
-    braintree.Configuration.configure(
-        braintree.Environment.Sandbox,
-        merchant_id=env('BRAINTREE_MERCHANT_ID'),
-        public_key=env('BRAINTREE_PUBLIC_KEY'),
-        private_key=env('BRAINTREE_PRIVATE_KEY')
-    )
-)
+# BRAINTREE_CONF = braintree.BraintreeGateway(
+#     braintree.Configuration.configure(
+#         braintree.Environment.Sandbox,
+#         merchant_id=env('BRAINTREE_MERCHANT_ID'),
+#         public_key=env('BRAINTREE_PUBLIC_KEY'),
+#         private_key=env('BRAINTREE_PRIVATE_KEY')
+#     )
+# )
