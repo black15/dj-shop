@@ -1,0 +1,61 @@
+{% comment %} {% load bootstrap_icons %} {% endcomment %}
+{% load static %}
+<div class="my-6">
+   <div class="slider max-w-screen bg-[#111]">
+		<img class="mx-auto" src="" />
+	</div>
+</div>
+<link rel="stylesheet" href="{% static 'css/carousel.css' %}">
+    <!--image slider start-->
+    <div class="slider max-w-screen">
+      <div class="slides">
+        <!--radio buttons start-->
+        <input type="radio" class="radio-switch__input sr-only" name="radio-btn" id="radio1">
+        <input type="radio" class="radio-switch__input sr-only" name="radio-btn" id="radio2">
+        <input type="radio" class="radio-switch__input sr-only" name="radio-btn" id="radio3">
+        <input type="radio" class="radio-switch__input sr-only" name="radio-btn" id="radio4">
+        <!--radio buttons end-->
+        <!--slide images start-->
+        <div class="slide first">
+          <img class="mx-auto" src="https://itgadgetsonline.com/wp-content/uploads/2022/09/1920x740.jpg" alt="">
+        </div>
+        <div class="slide max-w-screen">
+          <img class="mx-auto" src="https://www.asus.com/WebsitesBanner/global/banners/dj2kyvrcs71rc0ec/dj2kyvrcs71rc0ec-0_0_desktop_1X.jpg" alt="">
+        </div>
+        <div class="slide max-w-screen">
+          <img class="mx-auto" src="https://images.squarespace-cdn.com/content/v1/54a448f0e4b00bf98fe66115/1595005166200-636L1I8BSHAUIJ8SIZ7J/headwear+drco+banner+summer+2020.jpg?format=1000w" alt="">
+        </div>
+        <div class="slide max-w-screen">
+          <img class="mx-auto" src="https://static.vecteezy.com/system/resources/previews/003/376/368/non_2x/winter-sale-banner-paper-cut-illustration-vector.jpg" alt="">
+        </div>
+        <!--slide images end-->
+        <!--automatic navigation start-->
+        <div class="navigation-auto">
+          <div class="auto-btn1"></div>
+          <div class="auto-btn2"></div>
+          <div class="auto-btn3"></div>
+          <div class="auto-btn4"></div>
+        </div>
+        <!--automatic navigation end-->
+      </div>
+      <!--manual navigation start-->
+      <div class="navigation-manual">
+        <label for="radio1" class="manual-btn"></label>
+        <label for="radio2" class="manual-btn"></label>
+        <label for="radio3" class="manual-btn"></label>
+        <label for="radio4" class="manual-btn"></label>
+      </div>
+      <!--manual navigation end-->
+    </div>
+    <!--image slider end-->
+
+    <script type="text/javascript">
+    var counter = 1;
+    setInterval(function(){
+      document.getElementById('radio' + counter).checked = true;
+      counter++;
+      if(counter > 4){
+        counter = 1;
+      }
+    }, 8000);
+    </script>
