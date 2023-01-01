@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'cart',
     'order',
     'payment',
+    'account',
     
     # TailwindCSS
     'tailwind',
@@ -111,6 +112,8 @@ DATABASES = {
     }
 }
 
+# Authentication
+AUTH_USER_MODEL = "account.Account"
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
@@ -172,14 +175,6 @@ CELERY_RESULT_BACKEND = "redis://localhost:6379"
 
 # Email Backend
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
-# Braintree Api Settings
-# BRAINTREE_CONF = braintree.BraintreeGateway(
-#     braintree.Configuration.configure(
-#         braintree.Environment.Sandbox,
-#         merchant_id=env('BRAINTREE_MERCHANT_ID'),
-#         public_key=env('BRAINTREE_PUBLIC_KEY'),
-#         private_key=env('BRAINTREE_PRIVATE_KEY')
-#     )
-# )
+LOGIN_REDIRECT_URL = 'shop:all_products'
+LOGOUT_REDIRECT_URL = 'shop:all_products'

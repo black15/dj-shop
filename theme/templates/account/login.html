@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dj-Shop | Register{% endblock %}
+
+{% block content %}
+   <div class="px-6 mt-16">
+      <div class="flex flex-col space-y-12 items-center justify-around lg:flex-row-reverse lg:space-y-0 lg:space-x-12">
+			<div>
+				<img src="{% static 'img/shoppinglogin.svg' %}" />
+			</div>
+			<div class="max-w-4xl">
+				<h4 class="text-xl mb-4">Sign-In to your account</h4>
+				<form action="" method="post">
+					{% csrf_token %}
+					{{ form.non_field_errors }}
+					<div class="grid gap-6 mb-6 md:grid-cols-1">
+						{% for field in form %}
+							<div class="w-full">
+								<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{field.label_tag}}</label>
+								<input class="text-gray-700 w-80 md:w-96 rounded" id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="{% if field.id_for_label == "id_password" %}password{% else %}text{% endif %}" placeholder="{% if field.id_for_label == "id_password" %}********{% else %}abc@xyz.com{% endif %}"/>
+							</div>
+						{% endfor %}
+					</div>
+					<section class="section">
+						<div class="container">
+							<button id="submitBtn" type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Sign In</button>
+						</div>
+						</section>
+				</form>
+				<div class="flex flex-col mt-6">
+					<span class="max-w-xl text-gray-800 text-sm">Don't have an account yet, <a class="text-green-600 font-medium underline" href="{% url 'account:register' %}">Register now</a> </span>
+				</div>
+			</div>
+      </div>
+   </div>
+{% endblock content %}

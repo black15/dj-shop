@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dj-Shop | Register{% endblock %}
+
+{% block content %}
+   <div class="px-6 mt-16">
+      <div class="flex flex-col space-y-12 items-center justify-around lg:flex-row-reverse lg:space-y-0 lg:space-x-12">
+			<div>
+				<img src="{% static 'img/shoppingregister.svg' %}" />
+			</div>
+			<div class="max-w-4xl">
+				<h4 class="text-xl mb-4">Sign-Up for a new account</h4>
+				<form action="" method="post">
+					{% csrf_token %}
+					{{ form.non_field_errors }}
+					<div class="grid gap-6 mb-6 md:grid-cols-1">
+						{% for field in form %}
+							<div class="w-full">
+								<label for="{{field.id}}" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{field.label_tag}}</label>
+								{{field}}
+							</div>
+						{% endfor %}
+					</div>
+					<div class="flex items-start mb-6">
+						<div class="flex items-center h-5">
+							<input id="remember" type="checkbox" value="" class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-green-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-green-600 dark:ring-offset-gray-800" required>
+						</div>
+						<label for="remember" class="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I agree with the <a href="#" class="text-green-600 hover:underline dark:text-green-500">terms and conditions</a>.</label>
+					</div>
+					<section class="section">
+						<div class="container">
+							<button id="submitBtn" type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Sign Up</button>
+						</div>
+						</section>
+				</form>
+				<div class="flex flex-col mt-6">
+					<span class="max-w-xl text-gray-800 text-sm">Already have an account, <a class="text-green-600 font-medium underline" href="{% url 'account:login' %}">Login</a> </span>
+				</div>
+			</div>
+      </div>
+   </div>
+{% endblock content %}

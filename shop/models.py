@@ -28,16 +28,15 @@ class Product(models.Model):
    category    = models.ForeignKey("Category", related_name='products', on_delete=models.CASCADE)
    name        = models.CharField(max_length=50, db_index=True) 
    slug        = models.SlugField(max_length=200, db_index=True, unique=True)
-   image       = models.ImageField(upload_to='products/%Y/%m/%d')
+   image       = models.ImageField(upload_to='uploads/products/%Y/%m/%d')
    description = models.TextField(blank=True)
    price       = models.DecimalField(max_digits=10, decimal_places=2)
    available   = models.BooleanField(default=True)
    createdAt   = models.DateTimeField(auto_now_add=True)
    updatedAt   = models.DateTimeField(auto_now=True)
    
-   objects        = models.Manager() 
+   objects        = models.Manager()
    available_only = AvailableProducts()
-   
 
    class Meta:
       ordering = ('name',)
@@ -51,4 +50,4 @@ class Product(models.Model):
    
 class ProductImages(models.Model):
    product = models.ForeignKey("Product", on_delete=models.CASCADE)
-   images  = models.ImageField(upload_to='products/p/%Y/%m/%d')
+   images  = models.ImageField(upload_to='uploads/products/p/%Y/%m/%d')
