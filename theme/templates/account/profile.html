@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Dj-Shop | Register{% endblock %}
+
+{% block content %}
+<div class="px-6 mt-16">
+	<div class="flex flex-col space-y-12 items-center justify-around lg:flex-row-reverse lg:space-y-0 lg:space-x-12">
+		<div class='max-w-xs flex items-center'>
+			<img class="mx-auto w-full h-full object-cover bg-center rounded-full" src="{% if request.user.picture %}{{request.user.picture.url}}{% endif %}" />
+		</div>
+		<div class="">
+			<h4 class="text-xl mb-4">Update your account</h4>
+			<form method="post" enctype="multipart/form-data">
+				{% csrf_token %}
+				{{ form.non_field_errors }}
+				<div class="grid gap-6 mb-6 md:grid-cols-2">
+					{% for field in form %}
+						<div class="w-full">
+							<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{field.label_tag}}</label>
+							{% if field.html_name == 'picture' %}
+								<input class="mt-2" id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="file" />
+							{% elif field.html_name == 'birthday' %}
+								<input id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="date" />
+							{% else %}
+								{{field}}
+							{% endif %}
+						</div>
+					{% endfor %}
+				</div>
+				<section class="section">
+					<div class="container">
+						<button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save</button>
+					</div>
+				</section>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock content %}

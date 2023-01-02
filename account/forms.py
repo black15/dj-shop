@@ -13,7 +13,10 @@ class CustomUserChangeForm(UserChangeForm):
 		model = Account
 		fields = ('email',)
 
-# Register new user form
+class LoginForm(forms.Form):
+	username = forms.CharField(label="Username", max_length=100, required=True)
+	password = forms.CharField(label="Password", max_length=100, required=True)
+
 class RegistrationForm(forms.ModelForm):
 	password = forms.CharField(label='Password', widget=forms.PasswordInput(attrs={'class': 'text-gray-700 w-80 md:w-96 rounded'}))
 

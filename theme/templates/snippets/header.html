@@ -65,9 +65,9 @@
         </div>
       </div>
 
-      <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+      <div class="absolute inset-y-0 right-0 flex items-center pr-1 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
         <img class="block w-16 sm:hidden" src="https://dotmobo.github.io/images/djangopony.png" alt="Your Company">
-         <a href="{% url 'cart:cart_content' %}" class="flex flex-row-reverse text-center rounded-full bg-gray-50 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+         <a href="{% url 'cart:cart_content' %}" class="flex flex-row-reverse text-center rounded-full bg-gray-50 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
            <span class="ml-1">
              {% with count=cart.get_total_quantities  %}
                {% if count %}
@@ -77,25 +77,40 @@
            </span>
            <span class="sr-only">View notifications</span>
           <!-- Heroicon name: outline/bell -->
-          <svg fill="#555" width="26" height="26" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" stroke="#555" stroke-width="0"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"><path d="M 20.0079 39.6485 L 47.3596 39.6485 C 48.2735 39.6485 49.0703 38.8985 49.0703 37.8907 C 49.0703 36.8829 48.2735 36.1328 47.3596 36.1328 L 20.4063 36.1328 C 19.0704 36.1328 18.2501 35.1953 18.0391 33.7656 L 17.6641 31.3047 L 47.4062 31.3047 C 50.8281 31.3047 52.5859 29.1953 53.0783 25.8438 L 54.9532 13.4453 C 55.0003 13.1407 55.0468 12.7656 55.0468 12.5547 C 55.0468 11.4297 54.2030 10.6563 52.9142 10.6563 L 14.6407 10.6563 L 14.1954 7.6797 C 13.9610 5.8750 13.3048 4.9609 10.9141 4.9609 L 2.6876 4.9609 C 1.7501 4.9609 .9532 5.7813 .9532 6.7188 C .9532 7.6797 1.7501 8.5000 2.6876 8.5000 L 10.6094 8.5000 L 14.3594 34.2344 C 14.8516 37.5625 16.6094 39.6485 20.0079 39.6485 Z M 51.0623 14.1953 L 49.3987 25.4219 C 49.2110 26.8750 48.4377 27.7656 47.0548 27.7656 L 17.1485 27.7891 L 15.1563 14.1953 Z M 21.8594 51.0391 C 23.9688 51.0391 25.6563 49.375 25.6563 47.2422 C 25.6563 45.1328 23.9688 43.4453 21.8594 43.4453 C 19.7266 43.4453 18.0391 45.1328 18.0391 47.2422 C 18.0391 49.375 19.7266 51.0391 21.8594 51.0391 Z M 43.7735 51.0391 C 45.9062 51.0391 47.5939 49.375 47.5939 47.2422 C 47.5939 45.1328 45.9062 43.4453 43.7735 43.4453 C 41.6641 43.4453 39.9532 45.1328 39.9532 47.2422 C 39.9532 49.375 41.6641 51.0391 43.7735 51.0391 Z"></path></g></svg>
+          <svg fill="#555" width="30" height="30" viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" stroke="#555" stroke-width="0"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"><path d="M 20.0079 39.6485 L 47.3596 39.6485 C 48.2735 39.6485 49.0703 38.8985 49.0703 37.8907 C 49.0703 36.8829 48.2735 36.1328 47.3596 36.1328 L 20.4063 36.1328 C 19.0704 36.1328 18.2501 35.1953 18.0391 33.7656 L 17.6641 31.3047 L 47.4062 31.3047 C 50.8281 31.3047 52.5859 29.1953 53.0783 25.8438 L 54.9532 13.4453 C 55.0003 13.1407 55.0468 12.7656 55.0468 12.5547 C 55.0468 11.4297 54.2030 10.6563 52.9142 10.6563 L 14.6407 10.6563 L 14.1954 7.6797 C 13.9610 5.8750 13.3048 4.9609 10.9141 4.9609 L 2.6876 4.9609 C 1.7501 4.9609 .9532 5.7813 .9532 6.7188 C .9532 7.6797 1.7501 8.5000 2.6876 8.5000 L 10.6094 8.5000 L 14.3594 34.2344 C 14.8516 37.5625 16.6094 39.6485 20.0079 39.6485 Z M 51.0623 14.1953 L 49.3987 25.4219 C 49.2110 26.8750 48.4377 27.7656 47.0548 27.7656 L 17.1485 27.7891 L 15.1563 14.1953 Z M 21.8594 51.0391 C 23.9688 51.0391 25.6563 49.375 25.6563 47.2422 C 25.6563 45.1328 23.9688 43.4453 21.8594 43.4453 C 19.7266 43.4453 18.0391 45.1328 18.0391 47.2422 C 18.0391 49.375 19.7266 51.0391 21.8594 51.0391 Z M 43.7735 51.0391 C 45.9062 51.0391 47.5939 49.375 47.5939 47.2422 C 47.5939 45.1328 45.9062 43.4453 43.7735 43.4453 C 41.6641 43.4453 39.9532 45.1328 39.9532 47.2422 C 39.9532 49.375 41.6641 51.0391 43.7735 51.0391 Z"></path></g></svg>
          </a>
 
         <!-- Profile dropdown -->
-        <div class="relative ml-3">
-          <div>
+        <div class="relative mx-5">
+          <a href="{% if request.user.is_authenticated %}{% url 'account:profile' request.user.id %}{% else %}{% url 'account:login' %}{% endif %}">
             <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" type="button" class="flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-expanded="false" aria-haspopup="true">
               <span class="sr-only">Open user menu</span>
-              <svg class="w-8 h-8 rounded-full" fill="#555" version="1.1" id="Filled_Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve" stroke="#555"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"> <g id="User-Filled"> <path d="M17,6c0,2.76-2.24,5-5,5S7,8.76,7,6s2.24-5,5-5S17,3.24,17,6z M21,24v-5c0-4.42-3.58-8-8-8h-2c-4.42,0-8,3.58-8,8v5"></path> </g> </g></svg>
+              {% if request.user.is_authenticated %}
+                <svg width="30" height="30" class="rounded-full" fill="#34AA47" version="1.1" id="Filled_Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"> <g id="User-Filled"> <path d="M17,6c0,2.76-2.24,5-5,5S7,8.76,7,6s2.24-5,5-5S17,3.24,17,6z M21,24v-5c0-4.42-3.58-8-8-8h-2c-4.42,0-8,3.58-8,8v5"></path> </g> </g></svg>
+              {% else %}
+                <svg class="w-8 h-8 rounded-full" fill="#555" version="1.1" id="Filled_Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"> <g id="User-Filled"> <path d="M17,6c0,2.76-2.24,5-5,5S7,8.76,7,6s2.24-5,5-5S17,3.24,17,6z M21,24v-5c0-4.42-3.58-8-8-8h-2c-4.42,0-8,3.58-8,8v5"></path> </g> </g></svg>
+              {% endif %}
             </button>
-          </div>
+          </a>
+        </div>
 
-          
-          {% comment %} <div id="dropdownNavbar" class="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="user-menu-button" tabindex="-1">
-            <!-- Active: "bg-gray-100", Not Active: "" -->
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-0">Your Profile</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-1">Settings</a>
-            <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="user-menu-item-2">Sign out</a>
-          </div> {% endcomment %}
+        <div class="relative">
+          <a href="{% if request.user.is_authenticated %}{% url 'account:logout' %}{% else %}{% url 'account:login' %}{% endif %}">
+            <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" type="button" class="flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-expanded="false" aria-haspopup="true">
+              <span class="sr-only">Open user menu</span>
+              {% if request.user.is_authenticated %}
+                <svg width="30" height="30" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <title>logout</title>
+                  <desc>Created with sketchtool.</desc>
+                  <g id="web-app" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <g id="logout" fill="#555">
+                      <path d="M3,5 C3,3.9000001 3.9000001,3 5,3 C5,3 7.66666667,3 13,3 L13,5 L5,5 L5,19 L13,19 L13,21 C7.66666667,21 5,21 5,21 C3.9000001,21 3,20.1000004 3,19 C3,9.6236114 3,5 3,5 Z M17.1757866,11 L14.6402527,8.46446609 L16.0544662,7.05025253 L21.0042137,12 L16.0544662,16.9497475 L14.6402527,15.5355339 L17.1757866,13 L10.5900002,13 L10.5900002,11 L17.1757866,11 Z" id="Shape"></path>
+                    </g>
+                  </g>
+                </svg>
+              {% endif %}
+            </button>
+          </a>
         </div>
       </div>
     </div>

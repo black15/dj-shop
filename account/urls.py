@@ -1,13 +1,13 @@
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
-from .views import RegisterAccountView, ProfileView, LoginAccountView
+from .views import RegisterAccountView, ProfileView, LoginView
 
 app_name = "account"
 
 urlpatterns = [
 	path('register/', RegisterAccountView.as_view(), name='register'),
-	path('profile/', ProfileView.as_view(), name='profile'),
-	path('login/', LoginAccountView.as_view(), name='login'),
+	path('profile/<pk>', ProfileView.as_view(), name='profile'),
+	path('login/', LoginView.as_view(), name='login'),
 	path('logout/', auth_views.LogoutView.as_view(), name='logout'),
 
 	path('password_change/', auth_views.PasswordChangeView.as_view(), name='password_change'),

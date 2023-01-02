@@ -21,6 +21,7 @@ class AccountManager(BaseUserManager):
 			raise ValueError('Phone number is required')
 		extra_fields.setdefault('is_staff', False)
 		extra_fields.setdefault('is_superuser', False)
+
 		email = self.normalize_email(email)
 		user 	= self.model(
 			email=email, 
@@ -45,6 +46,8 @@ class AccountManager(BaseUserManager):
 			raise ValueError('Superuser must have is_staff=True.')
 		if extra_fields.get('is_superuser') is not True:
 			raise ValueError('Superuser must have is_superuser=True.')
+
+		self.user.is_admin = True
 		return self.create_user(email, password, **extra_fields)
 
 class Account(AbstractBaseUser, PermissionsMixin):
@@ -52,10 +55,10 @@ class Account(AbstractBaseUser, PermissionsMixin):
 	first_name 	= models.CharField(max_length=50, blank=False, null=False)
 	last_name 	= models.CharField(max_length=50, blank=False, null=False)
 	phone			= models.CharField("Phone Number", max_length=16)
-	picture 		= models.ImageField("User picture", upload_to='uploads/accounts/images/%Y/%m/%d', null=True)
+	picture 		= models.ImageField("User picture", upload_to='uploads/accounts/images/%Y/%m/%d', null=True, blank=True)
 	birthday 	= models.DateField(blank=True, null=True)
 	is_staff 	= models.BooleanField("Staff", 	default=False)
-	is_active 	= models.BooleanField("Active", 	default=False)
+	is_active 	= models.BooleanField("Active", 	default=True)
 	date_joined = models.DateField(auto_now_add=True)
 
 	USERNAME_FIELD 	= 'email'
