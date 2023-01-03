@@ -5,12 +5,20 @@
 
 {% block content %}
 <div class="px-6 mt-16">
-	<div class="flex flex-col space-y-12 items-center justify-around lg:flex-row-reverse lg:space-y-0 lg:space-x-12">
-		<div class='max-w-xs flex items-center'>
-			<img class="mx-auto w-full h-full object-cover bg-center rounded-full" src="{% if request.user.picture %}{{request.user.picture.url}}{% endif %}" />
+	<div class="flex flex-col space-y-12 items-center justify-center ld:justify-around lg:flex-row-reverse lg:space-y-0 lg:space-x-12">
+		<h4 class="text-xl mb-2 block lg:hidden">Update your account</h4>
+		<div class='max-w-xs hidden md:flex'>
+			<img src="{% if request.user.picture %}{{request.user.picture.url}}{% endif %}" class='mx-auto h-48 w-48 object-cover bg-center rounded-full' />
 		</div>
-		<div class="">
-			<h4 class="text-xl mb-4">Update your account</h4>
+		<div>
+			{% if messages %}
+				{% for message in messages %}
+					<div class="text-green-600 text-lg font-medium mb-6">
+						{{ message|safe }}
+					</div>
+				{% endfor %}
+			{% endif %}
+			<h4 class="text-xl mb-4 hidden lg:block">Update your account</h4>
 			<form method="post" enctype="multipart/form-data">
 				{% csrf_token %}
 				{{ form.non_field_errors }}
@@ -21,18 +29,19 @@
 							{% if field.html_name == 'picture' %}
 								<input class="mt-2" id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="file" />
 							{% elif field.html_name == 'birthday' %}
-								<input id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="date" />
+								<input id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="text" placeholder="2002-01-01" value="{{field.value}}"/>
 							{% else %}
 								{{field}}
 							{% endif %}
 						</div>
 					{% endfor %}
 				</div>
-				<section class="section">
-					<div class="container">
-						<button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save</button>
-					</div>
-				</section>
+				<div class='max-w-xs flex md:hidden'>
+					<img src="{% if request.user.picture %}{{request.user.picture.url}}{% endif %}" class='mx-auto h-48 w-48 object-cover bg-center rounded-full' />
+				</div>
+				<div class="container">
+					<button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full mt-16 md:w-auto md:mt-0 px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save</button>
+				</div>
 			</form>
 		</div>
 	</div>

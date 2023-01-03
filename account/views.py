@@ -3,6 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import TemplateView, View
+from django.contrib.messages.views import SuccessMessageMixin
 
 from django.urls import reverse
 
@@ -47,16 +48,17 @@ class RegisterAccountView(CreateView):
 			success_url += f'?next={next_url}'
 		return success_url
 
-class ProfileView(LoginRequiredMixin, UpdateView):
+class ProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 	login_url = '/user/login/'
 	model = Account
 	fields = ['first_name', 'last_name', 'phone', 'birthday', 'picture']
 	template_name = "account/profile.html"
-	
+	success_message = "Info updated with success."
+
 	def get_success_url(self):
 		return reverse('account:profile', kwargs={'pk': self.request.user.id})
 		
 	def dispatch(self, request, *args, **kwargs):
 		if request.user.id == int(self.kwargs.get('pk')):
 			return super().dispatch(request, *args, **kwargs)
-		return redirect('shop:all_products')
+		return redirect('account:profile', pk=request.user.id)

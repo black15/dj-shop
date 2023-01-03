@@ -85,20 +85,16 @@
           <a href="{% if request.user.is_authenticated %}{% url 'account:profile' request.user.id %}{% else %}{% url 'account:login' %}{% endif %}">
             <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" type="button" class="flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-expanded="false" aria-haspopup="true">
               <span class="sr-only">Open user menu</span>
-              {% if request.user.is_authenticated %}
-                <svg width="30" height="30" class="rounded-full" fill="#34AA47" version="1.1" id="Filled_Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"> <g id="User-Filled"> <path d="M17,6c0,2.76-2.24,5-5,5S7,8.76,7,6s2.24-5,5-5S17,3.24,17,6z M21,24v-5c0-4.42-3.58-8-8-8h-2c-4.42,0-8,3.58-8,8v5"></path> </g> </g></svg>
-              {% else %}
-                <svg class="w-8 h-8 rounded-full" fill="#555" version="1.1" id="Filled_Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"> <g id="User-Filled"> <path d="M17,6c0,2.76-2.24,5-5,5S7,8.76,7,6s2.24-5,5-5S17,3.24,17,6z M21,24v-5c0-4.42-3.58-8-8-8h-2c-4.42,0-8,3.58-8,8v5"></path> </g> </g></svg>
-              {% endif %}
+                <svg width="30" height="30" class="rounded-full" fill="{% if request.user.is_authenticated %}#34AA47{% else %}#555{% endif %}" version="1.1" id="Filled_Icons" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 24 24" enable-background="new 0 0 24 24" xml:space="preserve"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_iconCarrier"> <g id="User-Filled"> <path d="M17,6c0,2.76-2.24,5-5,5S7,8.76,7,6s2.24-5,5-5S17,3.24,17,6z M21,24v-5c0-4.42-3.58-8-8-8h-2c-4.42,0-8,3.58-8,8v5"></path></g></g></svg>
             </button>
           </a>
         </div>
 
         <div class="relative">
           <a href="{% if request.user.is_authenticated %}{% url 'account:logout' %}{% else %}{% url 'account:login' %}{% endif %}">
+            {% if request.user.is_authenticated %}
             <button id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" type="button" class="flex rounded-full text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" aria-expanded="false" aria-haspopup="true">
               <span class="sr-only">Open user menu</span>
-              {% if request.user.is_authenticated %}
                 <svg width="30" height="30" viewBox="0 0 24 24" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                   <title>logout</title>
                   <desc>Created with sketchtool.</desc>
@@ -108,8 +104,8 @@
                     </g>
                   </g>
                 </svg>
-              {% endif %}
             </button>
+            {% endif %}
           </a>
         </div>
       </div>
