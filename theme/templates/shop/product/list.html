@@ -8,30 +8,9 @@
          {% comment %} {% include 'components/categories.html' %} {% endcomment %}
          <div class="flex flex-row flex-wrap items-center justify-center overflow-x-auto md:space-x-6">
             {% for product in products %}
-               <div class='max-w-xs flex flex-col items-center m-2 my-6 text-center shadow'>
+               <div class='min-w-xs flex flex-col items-center m-1 mt-6 mb-2 text-center shadow p-4'>
                   <a href="{{product.get_absolute_url}}" class='flex flex-col space-y-2'>
-                     <img class='mx-auto h-full object-cover bg-center rounded-t' src={{product.image.url}} />
-                     <span class="max-w-md text-gray-800 truncate">{{product.name | truncatechars:30}} </span>
-                  </a>
-                  <span class="max-w-sm text-gray-500 mb-1">{{product.price}} $</span>
-               </div>
-               <div class='max-w-xs flex flex-col items-center m-2 my-6 text-center shadow'>
-                  <a href="{{product.get_absolute_url}}" class='flex flex-col space-y-2'>
-                     <img class='mx-auto h-full object-cover bg-center rounded-t' src={{product.image.url}} />
-                     <span class="max-w-md text-gray-800 truncate">{{product.name | truncatechars:30}} </span>
-                  </a>
-                  <span class="max-w-sm text-gray-500 mb-1">{{product.price}} $</span>
-               </div>
-               <div class='max-w-xs flex flex-col items-center m-2 my-6 text-center shadow'>
-                  <a href="{{product.get_absolute_url}}" class='flex flex-col space-y-2'>
-                     <img class='mx-auto h-full object-cover bg-center rounded-t' src={{product.image.url}} />
-                     <span class="max-w-md text-gray-800 truncate">{{product.name | truncatechars:30}} </span>
-                  </a>
-                  <span class="max-w-sm text-gray-500 mb-1">{{product.price}} $</span>
-               </div>
-               <div class='max-w-xs flex flex-col items-center m-2 my-6 text-center shadow'>
-                  <a href="{{product.get_absolute_url}}" class='flex flex-col space-y-2'>
-                     <img class='mx-auto h-full object-cover bg-center rounded-t' src={{product.image.url}} />
+                     <img class='mx-auto h-44 w-full object-cover bg-center rounded-t' src={{product.image.url}} />
                      <span class="max-w-md text-gray-800 truncate">{{product.name | truncatechars:30}} </span>
                   </a>
                   <span class="max-w-sm text-gray-500 mb-1">{{product.price}} $</span>
