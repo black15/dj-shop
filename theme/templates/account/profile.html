@@ -27,9 +27,9 @@
 						<div class="w-full">
 							<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{{field.label_tag}}</label>
 							{% if field.html_name == 'picture' %}
-								<input class="mt-2" id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="file" />
+								<input class="mt-2" id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="file"/>
 							{% elif field.html_name == 'birthday' %}
-								<input id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="text" placeholder="2002-01-01" value="{{field.value}}"/>
+								<input id="{{ field.id_for_label }}" name="{{ field.html_name }}" type="text" placeholder="2002-01-01"/>
 							{% else %}
 								{{field}}
 							{% endif %}
@@ -40,7 +40,7 @@
 					<img src="{% if request.user.picture %}{{request.user.picture.url}}{% endif %}" class='mx-auto h-48 w-48 object-cover bg-center rounded-full' />
 				</div>
 				<div class="container">
-					<button type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full mt-16 md:w-auto md:mt-0 px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Save</button>
+					<input type="submit" class="text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm w-full mt-16 md:w-auto md:mt-0 px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" value="Save">
 				</div>
 			</form>
 		</div>

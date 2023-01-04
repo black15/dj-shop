@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
 from django.contrib.auth.base_user import BaseUserManager
+from django.shortcuts import reverse
 
 class AccountManager(BaseUserManager):
 	"""
@@ -69,4 +70,7 @@ class Account(AbstractBaseUser, PermissionsMixin):
 	def __str__(self):
 		 return self.email
 	def get_full_name(self):
-		return f'{first_name} {last_name}'
+		return f'{self.first_name} {self.last_name}'
+	def get_absolute_url(self):
+		return reverse("account:profile", kwargs={"pk": self.pk})
+	

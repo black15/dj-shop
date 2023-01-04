@@ -15,38 +15,41 @@
          scrollbar-width: none;  /* Firefox */
      }
    </style>
+   
    <div class="flex flex-col space-y-6 px-6">
       {% include 'components/categories.html' %}
 
       <!-- Product Card -->
-      <div class="flex flex-col space-y-6">
+      <div class="flex flex-col space-y-12 mb-2 xl:items-center xl:flex-row xl:justify-between xl:space-x-12">
          <!-- Title and Category -->
          <div>
-            <h1 class="max-w-4xl text-3xl text-gray-800 font-semibodl mb-1">
-               {{product.name}}
-            </h1>
-            <h2 class="max-w-xl text-lg text-gray-700 italic mb-1">
-               {{product.category}}
-            </h2>
-         </div>
-         <!-- Product Image -->
-         <div class="flex flex-row space-x-2 hero container max-w-screen-lg pb-10 overflow-x-auto">
-            <img class='h-56 md:h-64 lg:h-80 pl-3' src="{{product.image.url}}">
-            <!-- Product Sub Images -->
-            {% if product_images %}
-               {% for image in product_images %}
-                  <img class='h-56 md:h-64 lg:h-80 pl-3' src="{{image.images.url}}">
-               {% endfor %}
-            {% endif %}
+            <div>
+               <h1 class="max-w-4xl text-3xl text-gray-800 font-semibodl mb-1">
+                  {{product.name}}
+               </h1>
+               <h2 class="max-w-xl text-lg text-gray-700 italic mb-1">
+                  {{product.category}}
+               </h2>
+               <h2 class="max-w-xl text-xl text-green-800 italic font-medium mb-4">
+                  {{product.price}} $
+               </h2>
+            </div>
+            <!-- Product Image -->
+            <div class="flex flex-row space-x-2 hero container max-w-screen-lg pb-10 overflow-x-auto">
+               <img class='h-56 md:h-64 lg:h-80 pr-3' src="{{product.image.url}}">
+               <!-- Product Sub Images -->
+               {% if product_images %}
+                  {% for image in product_images %}
+                     <img class='h-56 md:h-64 lg:h-80 pl-3' src="{{image.images.url}}">
+                  {% endfor %}
+               {% endif %}
+            </div>
          </div>
          <!-- Product Info -->
          <div class="flex flex-col">
-            <h2 class="max-w-xl text-lg text-green-800 italic mb-4">
-               {{product.price}} $
-            </h2>
             {% if product.description %}
                <h2 class="text-gray-800 text-xl font-medium my-1">Description</h2>
-               <div class="max-w-2xl max-h-96 overflow-y-auto scrollbar-hide text-gray-900 italic p-6 mb-4 bg-gray-100 border-l-4 border-gray-300 dark:border-gray-500 dark:bg-gray-800 rounded-r-lg">
+               <div class="max-w-2xl max-h-96 overflow-y-auto scrollbar-hide text-gray-900 italic p-6 mb-4 bg-white border-l-4 border-gray-300 dark:border-gray-500 dark:bg-gray-800 rounded-r-lg">
                   {% autoescape off %}
                      {{product.description | linebreaks }}
                   {% endautoescape %}
@@ -63,5 +66,49 @@
          <!-- End Product Info -->
       </div>
       <!-- End Product Card -->
+
+      <!-- Comments Section -->
+      <h1 class="max-w-4xl text-2xl text-gray-800 font-semibodl">Comments and Reviews</h1>
+      <!-- Comments Form -->
+      <div class="flex items-center justify-center shadow mt-16 mb-4 max-w-lg">
+         <form class="w-full max-w-xl bg-white rounded-lg px-4 pt-2" method="post">
+            {% csrf_token %}
+            <div class="flex flex-wrap -mx-3 mb-6">
+               <h2 class="px-4 pt-3 pb-2 text-gray-800 text-lg">Add a new comment</h2>
+               <div class="w-full md:w-full px-3 mb-2 mt-2">
+                  {% for field in form %}
+                     <textarea class="bg-gray-50 rounded border leading-normal resize-none w-full h-20 py-2 px-3 font-medium text-gray-800 placeholder-gray-700 focus:bg-white focus:border-gray-100" name="{{field.html_name}}" id="{{field.id_for_label}}" placeholder='Type Your Comment' required></textarea>
+                  {% endfor %}
+               </div>
+               <div class="w-full flex justify-end items-center md:w-full px-3">
+                  <div class="-mr-1">
+                     <input type='submit' class="bg-white text-gray-700 font-medium py-1 px-4 border border-gray-400 rounded-lg tracking-wide mr-1 hover:bg-gray-100" value='Post Comment'>
+                  </div>
+               </div>
+            </form>
+         </div>
+      </div>
+      <!-- End Comments Form -->
+      <!-- Comments -->
+      {% for comment in comments %}
+      <div class="flex mb-4">
+         <div class="relative grid grid-cols-1 gap-4 p-4 mb-2 border rounded-lg bg-white shadow w-full">
+            <div class="relative flex gap-4">
+               <div class="flex flex-col w-full">
+                  <div class="flex flex-row justify-between">
+                     <p class="relative text-xl whitespace-nowrap text-gray-600 truncate overflow-hidden">{{comment.author.get_full_name}}</p>
+                     <p class="flex space-x-6">
+                        <a class="text-gray-500 text-xl" href="#">DELETE</a>
+                        <a class="text-gray-500 text-xl" href="#">EDIT</a>
+                     </p>
+                  </div>
+                  <p class="text-gray-400 text-sm">{{comment.createdAt}}</p>
+               </div>
+            </div>
+            <p class="max-w-4xl text-gray-600">{{comment.comment}}</p>
+         </div>
+      </div>
+      {% endfor %}
+      <!-- End Comments -->
    </div>
 {% endblock content %}

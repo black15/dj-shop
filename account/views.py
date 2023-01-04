@@ -1,11 +1,9 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, reverse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import TemplateView, View
 from django.contrib.messages.views import SuccessMessageMixin
-
-from django.urls import reverse
 
 from .models import Account
 from .forms import RegistrationForm, LoginForm
@@ -47,7 +45,7 @@ class RegisterAccountView(CreateView):
 		if next_url:
 			success_url += f'?next={next_url}'
 		return success_url
-
+		
 class ProfileView(SuccessMessageMixin, LoginRequiredMixin, UpdateView):
 	login_url = '/user/login/'
 	model = Account
