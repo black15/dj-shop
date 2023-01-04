@@ -10,7 +10,7 @@
     E-Commerce Website Built With Python Django. 
     <br/>
     <br/>
-    <a href="https://github.com/black15/dj-shop /issues">Request Feature</a>
+    <a href="https://github.com/black15/dj-shop/issues">Request Feature</a>
   </p>
 
 ## About The Project
