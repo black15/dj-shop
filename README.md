@@ -15,7 +15,7 @@
 
 ## About The Project
 
-![Screen Shot](images/screenshot.png)
+![Demo Screenshot](https://user-images.githubusercontent.com/38563357/210660864-8cd141b0-9f88-4cf2-8c08-c4b0c000a662.png)
 
 In this project i used the following technologies:
 ***Backend***: Python Djnago (Only).
