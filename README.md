@@ -13,8 +13,12 @@
     <a href="https://github.com/black15/dj-shop /issues">Request Feature</a>
   </p>
 </p>
-
-![Downloads](https://img.shields.io/github/downloads/black15/dj-shop /total) ![Contributors](https://img.shields.io/github/contributors/black15/dj-shop ?color=dark-green) ![Issues](https://img.shields.io/github/issues/black15/dj-shop ) ![License](https://img.shields.io/github/license/black15/dj-shop ) 
+<!--
+![Downloads](https://img.shields.io/github/downloads/black15/dj-shop /total) 
+![Contributors](https://img.shields.io/github/contributors/black15/dj-shop ?color=dark-green) 
+-->
+![Issues](https://img.shields.io/github/issues/black15/dj-shop ) 
+![License](https://img.shields.io/github/license/black15/dj-shop ) 
 
 ## About The Project
 
