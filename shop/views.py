@@ -9,12 +9,16 @@ def products_list(request, category_slug=None):
    category    = None
    categories  = Category.objects.all()
    products    = Product.available_only.all()
+   recent      = Product.available_only.all().order_by('-updatedAt')[:5]
    if category_slug:
       category = get_object_or_404(Category, slug=category_slug)
       products = Product.available_only.filter(category=category)
+      recent   = Product.available_only.filter(category=category).order_by('-updatedAt')[:5]
+
    context['category']   = category
    context['categories'] = categories
    context['products']   = products
+   context['recent']     = recent
 
    return render(request, 'shop/product/list.html', context)
 

@@ -39,15 +39,15 @@ class Product(models.Model):
    available_only = AvailableProducts()
 
    class Meta:
-      ordering = ('name',)
+      ordering = ('createdAt',)
       index_together = (('id', 'slug'),)
 
    def get_absolute_url(self):
        return reverse("shop:product_by_id", args=[self.id, self.slug])
    
    def __str__(self):
-       return self.name
-   
+      return self.name
+
 class ProductImages(models.Model):
    product = models.ForeignKey("Product", on_delete=models.CASCADE)
    images  = models.ImageField(upload_to='uploads/products/p/%Y/%m/%d')

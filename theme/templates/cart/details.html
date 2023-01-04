@@ -6,6 +6,13 @@
 {% endblock %}
 
 {% block content %}
+   <style>
+      select {
+         outline: none;
+         border: 1px solid gray;
+         border-radius: 7px;
+      }
+   </style>
    <div class="container mx-auto">
       <div class="relative my-6 py-3 overflow-x-scroll md:px-6 md:overflow-x-auto">
          {% if cart.get_total_quantities %}

@@ -16,9 +16,11 @@
      }
    </style>
    
-   <div class="flex flex-col space-y-6 px-6">
-      {% include 'components/categories.html' %}
-
+   <div class="flex flex-col space-y-6 px-6 mt-24">
+      {% comment %} {% include 'components/categories.html' %} {% endcomment %}
+      <div class="text-sm text-gray-800">
+         <a href="{% url 'shop:all_products' %}">All Products</a> / <a href="{{product.category.get_absolute_url}}">{{product.category}}</a> / <a href="{{product.get_absolute_url}}">{{product.name}}</a>
+      </div>
       <!-- Product Card -->
       <div class="flex flex-col space-y-12 mb-2 xl:items-center xl:flex-row xl:justify-between xl:space-x-12">
          <!-- Title and Category -->
